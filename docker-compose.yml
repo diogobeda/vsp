@@ -1,0 +1,78 @@
+version: '3'
+services:
+  channel_api:
+    build:
+      context: .
+      dockerfile: ./cmd/channel_api/Dockerfile
+    environment:
+      MONGODB_URL: mongodb://mongodb:27017/youtube
+      PORT: 8000
+    depends_on:
+      - mongodb
+    ports:
+      - "8000:8000"
+      # - "2345:2345"
+    volumes:
+      - .:/var/local/go/src/github.com/diogobeda/vsp
+    security_opt:
+      - seccomp:unconfined
+  video_api:
+    build:
+      context: .
+      dockerfile: ./cmd/video_api/Dockerfile
+    environment:
+      MONGODB_URL: mongodb://mongodb:27017/youtube
+      NSQD_URL: nsqd:4150
+      PORT: 8001
+    depends_on:
+      - mongodb
+    ports:
+      - "8001:8001"
+      # - "2345:2345"
+    volumes:
+      - .:/var/local/go/src/github.com/diogobeda/vsp
+    security_opt:
+      - seccomp:unconfined
+  upload_worker:
+    build:
+      context: .
+      dockerfile: ./cmd/upload_worker/Dockerfile
+    environment:
+      NSQ_LOOKUPD_URL: nsqlookupd:4161
+      NSQD_URL: nsqd:4150
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      AWS_REGION: ${AWS_REGION}
+    depends_on:
+      - nsqlookupd
+    volumes:
+      - .:/var/local/go/src/github.com/diogobeda/vsp
+    security_opt:
+      - seccomp:unconfined
+  nsqlookupd:
+    image: nsqio/nsq
+    command: /nsqlookupd
+    ports:
+      - "4160:4160"
+      - "4161:4161"
+  nsqd:
+    image: nsqio/nsq
+    command: /nsqd --lookupd-tcp-address=nsqlookupd:4160
+    depends_on:
+      - nsqlookupd
+    ports:
+      - "4150:4150"
+      - "4151:4151"
+  nsqadmin:
+    image: nsqio/nsq
+    command: /nsqadmin --lookupd-http-address=nsqlookupd:4161
+    depends_on:
+      - nsqlookupd  
+    ports:
+      - "4171:4171"
+  mongodb:
+    image: bitnami/mongodb:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data/mongodb:/bitnami
