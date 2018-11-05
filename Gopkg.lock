@@ -21,6 +21,8 @@
     "aws/request",
     "aws/session",
     "aws/signer/v4",
+    "internal/ini",
+    "internal/s3err",
     "internal/sdkio",
     "internal/sdkrand",
     "internal/sdkuri",
@@ -38,8 +40,8 @@
     "service/s3/s3manager",
     "service/sts"
   ]
-  revision = "94b80148ea4b1b136682116294b151766a3b85c2"
-  version = "v1.14.27"
+  revision = "3264db248fe8d241f6949ed35e33b11c0aec3c93"
+  version = "v1.15.68"
 
 [[projects]]
   branch = "master"
@@ -51,13 +53,7 @@
     "internal/sasl",
     "internal/scram"
   ]
-  revision = "113d3961e7311526535a1ef7042196563d442761"
-
-[[projects]]
-  name = "github.com/go-ini/ini"
-  packages = ["."]
-  revision = "358ee7663966325963d4e8b2e1fbd570c5195153"
-  version = "v1.38.1"
+  revision = "eeefdecb41b842af6dc652aaea4026e8403e62df"
 
 [[projects]]
   branch = "master"
@@ -89,12 +85,6 @@
   revision = "584905176618da46b895b176c721b02c476b6993"
 
 [[projects]]
-  branch = "master"
-  name = "github.com/nareix/joy4"
-  packages = ["."]
-  revision = "f98bf9bd9e1f1c9dd66dde2d7776871242ca2ba8"
-
-[[projects]]
   name = "github.com/nsqio/go-nsq"
   packages = ["."]
   revision = "eee57a3ac4174c55924125bb15eeeda8cffb6e6f"
@@ -103,6 +93,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "f3981c276258d52f6bb562d040e0654d9ce6f851b4c70aeca1893f916c236573"
+  inputs-digest = "7ad29815c9a4444ab58fa8b01df34d9c6dc0512fcafdab9cf783a6042e3edfb8"
   solver-name = "gps-cdcl"
   solver-version = 1

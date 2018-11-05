@@ -24,11 +24,6 @@
 #   go-tests = true
 #   unused-packages = true
 
-
-[[constraint]]
-  name = "github.com/gorilla/mux"
-  version = "1.6.2"
-
 [prune]
   go-tests = true
   unused-packages = true
@@ -37,25 +32,9 @@
     name = "github.com/aws/aws-sdk-go"
     unused-packages = false
 
-  [[prune.project]]
-    name = "github.com/jmespath/go-jmespath"
-    unused-packages = false
-  
-  [[prune.project]]
-    name = "github.com/go-ini/ini"
-    unused-packages = false
-
-  [[prune.project]]
-    name = "github.com/nareix/joy4"
-    unused-packages = false
-
 [[constraint]]
   branch = "master"
   name = "github.com/globalsign/mgo"
-
-[[constraint]]
-  branch = "master"
-  name = "github.com/nareix/joy4"
 
 [[constraint]]
   name = "github.com/nsqio/go-nsq"
@@ -66,12 +45,9 @@
   version = "1.14.27"
 
 [[constraint]]
-  name = "github.com/go-ini/ini"
-  version = "1.38.1"
-
-[[constraint]]
-  name = "github.com/jmespath/go-jmespath"
-
-[[constraint]]
   branch = "master"
   name = "github.com/juju/loggo"
+
+[[constraint]]
+  name = "github.com/gorilla/mux"
+  version = "1.6.2"
